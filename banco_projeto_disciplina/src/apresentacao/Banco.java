@@ -72,22 +72,64 @@ public class Banco {
 
     public static void main(String args[]) {
         Banco banco = new Banco();
-        AcessoADado a = new AcessoADado();
+        AcessoADado acessoADado = new AcessoADado();
 
+        // Criar contas no banco de dados e também no Banco (ArrayList)
+        String numeroConta1 = "1654-3";
+        String numeroConta2 = "4067-6";
+        String numeroConta3 = "7865-2";
+        String numeroConta4 = "1234-7";
+
+        // Cadastrar contas no banco de dados
+        String respostaConta1 = acessoADado.cadastrar_conta_normal(numeroConta1);
+        String respostaConta2 = acessoADado.cadastrar_conta(numeroConta2, 2500);
+        String respostaConta3 = acessoADado.cadastrar_conta_normal(numeroConta3);
+        String respostaConta4 = acessoADado.cadastrar_conta(numeroConta4, 1000);
+        System.out.println(respostaConta1);  
+        System.out.println(respostaConta2);  
+        System.out.println(respostaConta3);  
+        System.out.println(respostaConta4);  
+
+        // Adicionar contas no Banco (ArrayList)
         Conta c1 = new ContaNormal();
-        c1.setNumero("1654-3");
-        c1.setSaldo(500);
+        c1.setNumero(numeroConta1);
+        c1.setSaldo(500); 
         banco.CriaConta(c1);
 
         Conta c2 = new ContaDebEspecial();
-        c2.setNumero("4067-6");
+        c2.setNumero(numeroConta2);
         c2.setSaldo(2500);
         banco.CriaConta(c2);
 
+        Conta c3 = new ContaNormal();
+        c3.setNumero(numeroConta3);
+        c3.setSaldo(1000);
+        banco.CriaConta(c3);
+
+        Conta c4 = new ContaDebEspecial();
+        c4.setNumero(numeroConta4);
+        c4.setSaldo(1000);
+        banco.CriaConta(c4);
+
+        // Listar contas do Banco
         banco.ListaContas();
-        banco.CreditaConta("1654-3", 1000);
+
+        // Creditar na conta "1654-3" e atualizar no banco de dados
+        banco.CreditaConta(numeroConta1, 1000);
+        acessoADado.atualizar_saldo(numeroConta1, 1500);  // Atualizando saldo no banco de dados
         banco.ListaContas();
-        banco.TransfereConta("1654-3", "4067-6", 500);
+
+        // Transferir valor de uma conta para outra
+        banco.TransfereConta(numeroConta1, numeroConta2, 500);
+        acessoADado.atualizar_saldo(numeroConta1, 1000);  // Atualizando saldo no banco de dados
+        acessoADado.atualizar_saldo(numeroConta2, 3000);  // Atualizando saldo no banco de dados
         banco.ListaContas();
+
+        // Remover conta "1654-3"
+        banco.RemoveConta(numeroConta1);
+        String respostaRemocao = acessoADado.remover_conta(numeroConta1);
+        System.out.println(respostaRemocao);  // Output da operação
+        banco.ListaContas();
+
     }
 }
