@@ -8,8 +8,8 @@ public class ConexaoPostgreSQL {
     public static void main(String[] args) {
         // Dados de conexão
         String url = "jdbc:postgresql://localhost:5432/banco_de_dados"; 
-        String usuario = "user"; // Substitua pelo seu usuário do banco
-        String senha = "si250350"; // Substitua pela sua senha
+        String usuario = "user"; 
+        String senha = "si250350"; 
 
         // Tenta estabelecer a conexão
         try {
