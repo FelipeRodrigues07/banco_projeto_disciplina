@@ -19,8 +19,6 @@ public class ConexaoPostgreSQL {
             // Conectar ao banco de dados
             Connection conn = DriverManager.getConnection(url, usuario, senha);
             System.out.println("Conectado ao banco de dados com sucesso!");
-
-            // Realize suas operações no banco aqui
             
             // Fechar a conexão
             conn.close();
